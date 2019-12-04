@@ -1,1 +1,9 @@
-<iframe src="https://en.wikipedia.org/wiki/Cat#:~:text=Cat">
+<script>
+function navigate() {
+  let iframe = document.getElementById("iframe");
+  iframe.src = "https://en.wikipedia.org/wiki/Cat#:~:text=Cat";
+}
+</script>
+
+<button onclick="navigate()">Navigate iframe</button>
+<iframe id="iframe" src="http://example.com" height=400 width=600>
