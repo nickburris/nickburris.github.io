@@ -1,6 +1,26 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PaymentRequest test</title>
+  <script src="util.js"></script>
+  <script src="payment-request.js"></script>
+  <style>
+    .info {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
 <body>
+  <h1>PaymentRequest test</h1>
   <p>
     This page uses the PaymentRequest API to request payment. This is just a
     demo and no payment will be processed.
   </p>
+  <p>
+    The <a href="https://radical-tested-bean.glitch.me/">NickPay payment handler</a> is supported.
+  </p>
+  <button id="buy" onclick="buy()">Buy</button>
+  <button id="reset" onclick="location.reload()" hidden>Reset</button>
 </body>
