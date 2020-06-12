@@ -1,23 +1,25 @@
 /**
- * Appends a generic message with className to the page body.
+ * Sets a message with className as the status.
  */
-function appendMessage(message, className) {
+function setStatus(message, className) {
   let element = document.createElement('pre');
   element.innerHTML = message;
   element.className = className;
-  document.body.appendChild(element);
+  let status = document.getElementById("status");
+  status.innerHTML = '';
+  status.appendChild(element);
 }
 
 /**
- * Appends an error message to the page body.
+ * Sets the status to an error message.
  */
 function error(message) {
-  appendMessage(message, 'error');
+  setStatus(message, 'error');
 }
 
 /**
- * Appends an info message to the page body.
+ * Sets the status to an info message.
  */
 function info(message) {
-  appendMessage(message, 'info');
+  setStatus(message, 'info');
 }

@@ -10,6 +10,12 @@
     .error {
       color: red;
     }
+    #status {
+      width: 90%;
+      max-width: 500px;
+      border: 1px solid gray;
+      padding-left: 10px;
+    }
   </style>
 </head>
 <body>
@@ -23,4 +29,6 @@
   </p>
   <button id="buy" onclick="buy()" disabled>Buy</button>
   <button id="reset" onclick="reloadPaymentRequest()">Reset</button>
+  <p style="margin-left: 5px; margin-bottom: 0px;">Status</p>
+  <div id="status"></div>
 </body>
