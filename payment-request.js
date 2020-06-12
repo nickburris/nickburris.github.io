@@ -1,7 +1,9 @@
+var payment_request;
+
 /**
- * Load a PaymentRequest into global |request|
+ * Load a PaymentRequest into global |payment_request|
  */
-function load() {
+function reloadPaymentRequest() {
   const paymentMethods = [{
     supportedMethods: 'basic-card'
   },
@@ -20,9 +22,12 @@ function load() {
   };
   
   try {
-    request = new PaymentRequest(paymentMethods, paymentDetails);
-    request.canMakePayment().then(function(result) {
+    payment_request = new PaymentRequest(paymentMethods, paymentDetails);
+    payment_request.canMakePayment().then(function(result) {
       info(result ? 'Can make payment' : 'Cannot make payment');
+      
+      // Enable the buy button
+      document.getElementById("buy").disabled = false;
     }).catch(handleError);
   } catch(e) {
     error(e.message);
@@ -33,17 +38,14 @@ function load() {
  * Shows the payment request.
  */
 function buy() {
-  if (!request || !window.PaymentRequest) {
+  if (!payment_request || !window.PaymentRequest) {
     error('No PaymentRequest API');
     return;
   }
 
-  request.show().then(handlePaymentResponse).catch(handleError);
-}
-
-function showResetButton() {
-  document.getElementById("buy").hidden = true;
-  document.getElementById("reset").hidden = false;
+  // Disable the buy button
+  document.getElementById("buy").disabled = true;
+  payment_request.show().then(handlePaymentResponse).catch(handleError);
 }
 
 function handlePaymentResponse(response) {
@@ -51,15 +53,13 @@ function handlePaymentResponse(response) {
   response.complete('success').then(function() {
     info('Success! No payment will be processed.');
     info('PaymentResponse ' + JSON.stringify(response, undefined, 2));
-    showResetButton();
   }).catch(handleError);
 }
 
 function handleError(e) {
   error(e);
-  showResetButton();
 }
 
-// Load the PaymentRequest on page load
-var request;
-load();
+window.onload = function() {
+  reloadPaymentRequest();
+}
