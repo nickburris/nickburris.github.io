@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+  <title>Invalid shipping request</title>
+</head>
+<body>
+  <p>Simple test page for crbug.com/1082630</p>
+  <p>Creates a payment request that requests shipping details but does not handle shippingaddresschange event</p>
+  <script>
+    const paymentDetails = {total: {label: 'Total', amount: {currency: 'CAD', value:13.6}}};
+    const supportedPaymentMethods = [{supportedMethods: 'basic-card',}];
+    const options = {requestShipping: true};
+    new PaymentRequest(supportedPaymentMethods, paymentDetails, options).show();
+  </script>
+</body>
