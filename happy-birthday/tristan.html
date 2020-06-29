@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<style>
+body {
+  margin: 0;
+  background: white;
+  overflow: hidden;
+  background-image: url('vivi.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 60% 50%;
+}
+
+#perspective {
+  margin-left: calc((100vw - 50vmin) / 2);
+  margin-top: calc((100vh - 50vmin) / 4);
+  width: 50vmin;
+  height: 50vmin;
+  perspective: 60vmin;
+}
+
+#container {
+  width: 50vmin;
+  height: 50vmin;
+  line-height: 0;
+  transform-style: preserve-3d;
+}
+
+.box {
+  display: inline-block;
+  background: black;
+}
+
+.letter {
+  color: maroon;
+  text-align: center;
+  font-size: 100%;
+}
+</style>
+
+<div id="perspective">
+  <div id="container"></div>
+</div>
+
+<script>
+container.animate({
+  transform: [
+    'rotateZ(0deg)',
+    'rotateZ(360deg)',
+  ],
+}, {
+  duration: 20000,
+  iterations: Infinity,
+});
+
+var sideCount = 22;
+var adjustment = (sideCount % 2) * 0.5;
+var min = -sideCount / 2 + adjustment;
+var max = sideCount / 2 + adjustment;
+
+var letters = ['H', 'A', 'P', 'P', 'Y', '🎈', 'B', 'I', 'R', 'T', 'H', 'D', 'A', 'Y', '🎈', 'T', 'R', 'I', 'S', 'T', 'A', 'N'];
+var l = 0;
+var colors = ['lightblue', 'lightcoral', 'lightcyan', 'lightsalmon', 'lightpink', 'lightyellow']
+var c = 0;
+
+for (var y = min; y < max; y++) {
+  var box = createBox(letters[l++], colors[c++]);
+  c %= colors.length;
+  box.animate({
+    transform: [
+      'translateZ(0px)',
+      'translateZ(40px)',
+    ],
+    opacity: [1, 0.2],
+  }, {
+    delay: (y*y) * 20,
+    duration: 2000,
+    iterations: Infinity,
+    direction: 'alternate',
+    easing: 'ease-in',
+  });
+}
+
+function createBox(letter, color) {
+  var box = document.createElement('div');
+  box.className = 'box';
+  box.style.width = (100 / sideCount) + '%';
+  box.style.height = (100 / sideCount) + '%';
+  box.style.background = color;
+  var text = document.createElement('p');
+  text.className = 'letter';
+  text.innerText = letter;
+  box.appendChild(text);
+
+  container.appendChild(box);
+  return box;
+}
+</script>
