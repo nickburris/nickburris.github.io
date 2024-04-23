@@ -39,7 +39,7 @@ function buildPaymentRequest() {
 
   const supportedInstruments = [
     {
-      supportedMethods: `https://nickburris.github.io/apps/silent-pay/payment_method_manifest.json`
+      supportedMethods: `https://nickburris.github.io/pr/apps/silent-pay/payment_method_manifest.json`
     }
   ];
 
