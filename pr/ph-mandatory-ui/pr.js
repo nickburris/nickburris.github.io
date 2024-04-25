@@ -115,10 +115,14 @@ function onBuyClicked(action) {
       .then(handlePaymentResponse)
       .catch(function(err) {
         error(err);
-        request = buildPaymentRequest();
+        request = buildPaymentRequestWithData({
+          action: action
+        });
       });
   } catch (e) {
     error("Developer mistake: '" + e.message + "'");
-    request = buildPaymentRequest();
+    request = buildPaymentRequestWithData({
+      action: action
+    });
   }
 }
