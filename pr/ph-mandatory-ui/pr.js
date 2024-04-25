@@ -48,7 +48,10 @@ function buildPaymentRequestWithData(data) {
   let request = null;
 
   try {
-    details.modifiers = [{data: data}];
+    details.modifiers = [{
+      supportedMethods: "https://silent-pay-app.glitch.me/method-manifest",
+      data: data
+    }];
     request = new PaymentRequest(supportedInstruments, details);
     if (request.canMakePayment) {
       request
