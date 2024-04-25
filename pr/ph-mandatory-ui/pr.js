@@ -48,7 +48,7 @@ function buildPaymentRequestWithData(data) {
   let request = null;
 
   try {
-    details.modifiers = {data: data};
+    details.modifiers = [{data: data}];
     request = new PaymentRequest(supportedInstruments, details);
     if (request.canMakePayment) {
       request
