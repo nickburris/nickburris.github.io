@@ -16,7 +16,8 @@
       </p>
       <p>Price: USD <b>$</b><b id="total"></b></p>
       <p><button onclick="onBuyClicked('open')">Open normally</button></p>
-      <p><button onclick="onBuyClicked('none')">No openWindow</button></p>
+      <p><button onclick="onBuyClicked('none')">paymentrequest event no-op</button></p>
+      <p><button onclick="onBuyClicked('reject')">Respond with rejected promise</button></p>
     </div>
     <pre id="msg"></pre>
     <script src="util.js"></script>
