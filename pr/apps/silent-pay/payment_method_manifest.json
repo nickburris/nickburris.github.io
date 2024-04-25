@@ -1,4 +1,0 @@
-{
-  "default_applications": ["https://nickburris.github.io/pr/apps/silent-pay/web_manifest.json"],
-  "supported_origins": ["https://nickburris.github.io"]
-}

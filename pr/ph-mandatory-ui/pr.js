@@ -32,20 +32,23 @@ window.onload = () => {
  * Initializes the payment request object.
  * @return {PaymentRequest} The payment request object.
  */
-function buildPaymentRequest() {
+function buildPaymentRequestWithData(data) {
   if (!window.PaymentRequest) {
     return null;
   }
 
   const supportedInstruments = [
     {
-      supportedMethods: `https://nickburris.github.io/pr/apps/silent-pay/payment_method_manifest.json`
+      supportedMethods: [
+        "https://silent-pay-app.glitch.me/method-manifest"
+      ]
     }
   ];
 
   let request = null;
 
   try {
+    details.modifiers = {data: data};
     request = new PaymentRequest(supportedInstruments, details);
     if (request.canMakePayment) {
       request
@@ -74,8 +77,6 @@ function buildPaymentRequest() {
   return request;
 }
 
-let request = buildPaymentRequest();
-
 /**
  * Handles the response from PaymentRequest.show().
  */
@@ -87,14 +88,18 @@ function handlePaymentResponse(response) {
     })
     .catch(function(err) {
       error(err);
-      request = buildPaymentRequest();
+      request = buildPaymentRequestWithData({});
     });
 }
 
 /**
  * Launches payment request for the payment method.
  */
-function onBuyClicked() {
+function onBuyClicked(action) {
+  let request = buildPaymentRequestWithData({
+    action: action
+  });
+
   // eslint-disable-line no-unused-vars
   if (!window.PaymentRequest || !request) {
     error("PaymentRequest API is not supported.");
